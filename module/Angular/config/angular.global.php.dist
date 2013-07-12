@@ -1,0 +1,29 @@
+<?php
+/**
+ * ZfAngular Configuration
+ *
+ * If you have a ./config/autoload/ directory set up for your project, you can
+ * drop this config file in it and change the values as you wish.
+ */
+
+ $settings = array(
+    'cdn'     : true,
+    'version' : '',
+    'routes' : array(
+        'when'        : array(array(
+            'url'        : '',
+            'template'   : '',
+            'controller' : ''
+        )),
+        'otherwise'  : array(
+            'url' : ''
+        )
+    )
+ );
+
+ /**
+  * You do not need to edit below this line
+  */
+ return array(
+    'zfangular' => $settings,
+ );
