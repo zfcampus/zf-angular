@@ -10,15 +10,40 @@
     'cdn'     => false,
     'cdn_url' => 'https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js',
     'file'    => '',
-    'app'     => '',
+    'app'     => 'afui',
     'routes' => array(
-        'when' => array(array(
-            'url'        => '',
-            'template'   => '',
-            'controller' => ''
-        )),
+        'when' => array(
+            '/welcome' => array(
+                'template'   => '/partial/welcome.html',
+                'controller' => 'WelcomeController'
+            ),
+            '/screen-setup-1' => array(
+                'template'   => '/partial/screen-setup-1.html',
+                'controller' => 'ScreenController'
+            ),
+            '/screen-setup-2a' => array(
+                'template'   => '/partial/screen-setup-2a-html',
+                'controller' => 'ScreenController'
+            ),
+            '/screen-setup-2b' => array(
+                'template'   => '/partial/screen-setup-2b.html',
+                'controller' => 'ScreenController'
+            ),
+            '/screen-develop-1' => array(
+                'template'   => '/partial/screen-develop-1.html',
+                'controller' => 'ScreenController'
+            ),
+            '/screen-develop-2a' => array(
+                'template'   => '/partial/screen-develop-2a.html',
+                'controller' => 'ScreenController'
+            ),
+            '/screen-develop-2b' => array(
+                'template'   => '/partial/screen-develop-2b.html',
+                'controller' => 'ResourceCrudController'
+            )
+        ),
         'otherwise' => array(
-            'url' => ''
+            'redirectTo' => '/welcome'
         )
     )
  );

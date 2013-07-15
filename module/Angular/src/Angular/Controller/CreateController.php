@@ -13,18 +13,24 @@ class CreateController extends AbstractActionController
     public function CreateAppAction()
     {
         $console = $this->getServiceLocator()->get('console');      
-        $config = $this->getServiceLocator()->get('config'); 
+        $config  = $this->getServiceLocator()->get('config'); 
 
         if (!isset($config['zfangular'])) {
             return $this->sendError(
-                'The zfangular key in your configuration file is missing'
+                'zfangular key missing in your configuration file'
             );
         }
         
         $zfa = $config['zfangular'];
         if (!isset($zfa['routes'])) {
             return $this->sendError(
-                'The routes key of zfangular is empty in your config file'
+                'no Angular routes specified (routes) in your config file'
+            );
+        }
+
+        if (empty($zfa['app'])) {
+            return $this->sendError(
+                'the Angular application name (app) is empty in your config file'
             );
         }
 
@@ -37,8 +43,18 @@ class CreateController extends AbstractActionController
             mkdir ('public/js/angular');
         }
 
-        // @todo Read the zfangular routes part and generate the app.js file for Angular
-        file_put_contents('public/js/angular/app.js','');        
+        $js = '';
+        if (isset($zfa['app'])) {
+            $js .= "'use strict';\n";
+            $js .= "// Declare app level module which depends on filters, and services\n";
+            $js .= "angular.module('{$zfa['app']}', ['{$zfa['app']}.controllers']).\n";
+            $js .= "\t" . 'config([\'$routeProvider\', \'$locationProvider\', function($routeProvider, $locationProvider) {' . "\n";
+            $js .= "\t" . '$locationProvider.html5Mode(true);' . "\n";
+            $js .= $this->getApp($zfa['routes']);
+            $js .= "\t" . '}]);' . "\n";
+        }
+
+        file_put_contents('public/js/angular/app.js', $js);        
         
         $console->writeLine("Angular App generated in public/js/angular/app.js");
     }
@@ -53,7 +69,32 @@ class CreateController extends AbstractActionController
     {
         $m = new ConsoleModel();
         $m->setErrorLevel(2);
-        $m->setResult($msg . PHP_EOL);
+        $m->setResult('ERROR: ' . $msg . PHP_EOL);
         return $m;
     }
+
+    protected function getApp($config)
+    {
+        if (empty($config) || !is_array($config)) {
+            return false;
+        }
+        $result = '';
+        if (isset($config['when'])) {
+            foreach ($config['when'] as $url => $value) {
+                $result .= "\t\t" . '$routeProvider.when(\''. $url .
+                    '\', {templateUrl: \''. $value['template'] .
+                    '\', controller: \''. $value['controller'] . '\'});'. "\n";
+            }
+        }
+        if (isset($config['otherwise'])) {
+            $otherwise = $config['otherwise'];
+            if (isset($otherwise['redirectTo'])) {
+                $result .= "\t\t" . '$routeProvider.otherwise({redirectTo: \'' .
+                    $otherwise['redirectTo'] . '\'});' . "\n";
+            }
+        }
+        return $result;
+    }
+
+
 }
