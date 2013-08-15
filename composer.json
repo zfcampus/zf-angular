@@ -1,5 +1,5 @@
 {
-    "name": "zfcampus/zfangular",
+    "name": "zfcampus/zf-angular",
     "description": "ZFAngular module for ZF2",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -7,8 +7,9 @@
         "zf2"
     ],
     "homepage": "http://framework.zend.com/",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": ">2.2.0rc1"
+        "zendframework/zendframework": "dev-develop"
     }
 }
