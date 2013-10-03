@@ -1,12 +1,19 @@
 {
     "name": "zfcampus/zf-angular",
     "description": "ZFAngular module for ZF2",
+    "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [
         "framework",
         "zf2"
     ],
-    "homepage": "http://framework.zend.com/",
+    "homepage": "http://apigility.org/",
+    "support": {
+        "email": "apigility-users@zend.com",
+        "irc": "irc://irc.freenode.net/apigility",
+        "source": "https://github.com/zfcampus/zf-angular",
+        "issues": "https://github.com/zfcampus/zf-angular/issues"
+    },
     "minimum-stability": "dev",
     "repositories": [
         { "type": "composer", "url": "https://packages.zendframework.com" }
