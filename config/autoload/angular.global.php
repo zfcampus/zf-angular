@@ -1,5 +1,10 @@
 <?php
 /**
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
+ */
+
+/**
  * ZfAngular Configuration
  *
  * If you have a ./config/autoload/ directory set up for your project, you can
