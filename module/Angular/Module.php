@@ -37,7 +37,7 @@ class Module implements ConsoleBannerProviderInterface
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        
+
         $sm      = $application->getServiceManager();
         $config  = $sm->get('config');
         $request = $sm->get('request');
@@ -65,7 +65,8 @@ class Module implements ConsoleBannerProviderInterface
         }
     }
 
-    public function getConsoleBanner(Console $console){
+    public function getConsoleBanner(Console $console)
+    {
         return "This is ZFAngular beta.";
     }
 }
