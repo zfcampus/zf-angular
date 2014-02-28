@@ -1,7 +1,7 @@
 <?php
 /**
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
 namespace Angular\Controller;
@@ -16,15 +16,15 @@ class CreateController extends AbstractActionController
 
     public function CreateAppAction()
     {
-        $console = $this->getServiceLocator()->get('console');      
-        $config  = $this->getServiceLocator()->get('config'); 
+        $console = $this->getServiceLocator()->get('console');
+        $config  = $this->getServiceLocator()->get('config');
 
         if (!isset($config['zfangular'])) {
             return $this->sendError(
                 'zfangular key missing in your configuration file'
             );
         }
-        
+
         $zfa = $config['zfangular'];
         if (!isset($zfa['routes'])) {
             return $this->sendError(
@@ -52,14 +52,14 @@ class CreateController extends AbstractActionController
             $js .= "'use strict';\n";
             $js .= "// Declare app level module which depends on filters, and services\n";
             $js .= "angular.module('{$zfa['app']}', ['{$zfa['app']}.controllers']).\n";
-            $js .= "\t" . 'config([\'$routeProvider\', \'$locationProvider\', function($routeProvider, $locationProvider) {' . "\n";
+            $js .= "\t" . 'config([\'$routeProvider\', \'$locationProvider\', function ($routeProvider, $locationProvider) {' . "\n";
             $js .= "\t" . '$locationProvider.html5Mode(true);' . "\n";
             $js .= $this->getApp($zfa['routes']);
             $js .= "\t" . '}]);' . "\n";
         }
 
-        file_put_contents('public/js/angular/app.js', $js);        
-        
+        file_put_contents('public/js/angular/app.js', $js);
+
         $console->writeLine("Angular App generated in public/js/angular/app.js");
     }
 

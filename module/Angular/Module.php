@@ -1,7 +1,7 @@
 <?php
 /**
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
 namespace Angular;
@@ -37,7 +37,7 @@ class Module implements ConsoleBannerProviderInterface
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        
+
         $sm      = $application->getServiceManager();
         $config  = $sm->get('config');
         $request = $sm->get('request');
@@ -65,7 +65,8 @@ class Module implements ConsoleBannerProviderInterface
         }
     }
 
-    public function getConsoleBanner(Console $console){
+    public function getConsoleBanner(Console $console)
+    {
         return "This is ZFAngular beta.";
     }
 }
