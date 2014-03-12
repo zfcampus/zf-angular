@@ -20,6 +20,6 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "dev-develop"
+        "zendframework/zendframework": "~2.3"
     }
 }
